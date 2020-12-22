@@ -1,22 +1,26 @@
 steps:
   - name: gcr.io/cloud-builders/docker
     args:
-      ["build", "-t", "gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${SHORT_SHA}", "."]
+      ["build", "-t", "gcr.io/$PROJECT_ID/pipeline-demo:${SHORT_SHA}", "."]
+    dir: "app"
 
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$PROJECT_ID/${_SERVICE_NAME}"]
+    args: ["push", "gcr.io/$PROJECT_ID/pipeline-demo"]
+    dir: "app"
 
   - name: "gcr.io/cloud-builders/gcloud"
     args:
       [
+        "beta",
         "run",
         "deploy",
-        "${_SERVICE_NAME}",
+        "pipeline-demo",
         "--image",
-        "gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${SHORT_SHA}",
+        "gcr.io/$PROJECT_ID/pipeline-demo:${SHORT_SHA}",
         "--region",
         "us-central1",
         "--platform",
         "managed",
         "--allow-unauthenticated",
       ]
+    dir: "app"

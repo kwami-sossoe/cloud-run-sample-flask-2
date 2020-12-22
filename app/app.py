@@ -1,12 +1,10 @@
 import logging
 import os
-
 from flask import Flask
 from secure import require_apikey
 
 
 app = Flask(__name__)
-
 
 @app.route('/health')
 def health():
@@ -16,7 +14,7 @@ def health():
 @app.route('/hello')
 @require_apikey
 def hello():
-    return {'hello': 'world'}
+    return {'hello': 'world; on the way for leveraging myself on CI/CD pipeline ! '}
 
 
 if __name__ == "__main__":
