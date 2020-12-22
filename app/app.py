@@ -16,7 +16,7 @@ def health():
 @app.route('/hello')
 @require_apikey
 def hello():
-    return {'hello': 'world'}
+    return {'hello': 'world; Thanks for helping me learn CI/CD pipeline ! '}
 
 
 if __name__ == "__main__":
